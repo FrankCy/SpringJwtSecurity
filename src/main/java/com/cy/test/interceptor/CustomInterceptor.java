@@ -25,7 +25,7 @@ import java.util.List;
  * @date: 2018/8/15 下午6:34
  * @mofified By:
  */
-public class CustomizeInterceptor implements HandlerInterceptor {
+public class CustomInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
@@ -34,7 +34,9 @@ public class CustomizeInterceptor implements HandlerInterceptor {
         String sign = request.getParameter("sign");
         //签名验证
         if((!StringUtils.isEmpty(sign)) && checkSign(request, sign) ) {
-            //通过
+            //通过 —— 校验token有效性
+
+
         } else {
             //失败
 
