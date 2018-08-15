@@ -2,7 +2,6 @@ package com.cy.test.impl;
 
 import com.cy.test.service.UserService;
 import org.json.simple.JSONObject;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 /**

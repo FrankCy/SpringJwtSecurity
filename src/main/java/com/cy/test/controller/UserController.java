@@ -26,7 +26,7 @@ public class UserController {
     @ResponseBody
     public String hello() {
         return userService.initUserInfo();
-
     }
+
 }
 
