@@ -1,7 +1,5 @@
 package com.cy.test.interceptor;
 
-import com.cy.test.util.JwtUtil;
-import io.jsonwebtoken.Claims;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -9,9 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,7 +26,7 @@ public class CustomInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         System.out.println("执行自定义拦截器 <-----> preHandle ");
-        //判断token有效性
+        //判断签名
         String sign = request.getParameter("sign");
         //签名验证
         if((!StringUtils.isEmpty(sign)) && checkSign(request, sign) ) {
