@@ -1,6 +1,8 @@
 package com.cy.test.interceptor;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,31 +25,34 @@ import java.util.List;
  */
 public class CustomInterceptor implements HandlerInterceptor {
 
+    private final Logger logger = LoggerFactory.getLogger(CustomInterceptor.class);
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        System.out.println("执行自定义拦截器 <-----> preHandle ");
+        logger.info("执行自定义拦截器 <-----> preHandle ");
         //判断签名
         String sign = request.getParameter("sign");
         //签名验证
-        if((!StringUtils.isEmpty(sign)) && checkSign(request, sign) ) {
+        if((!StringUtils.isEmpty(sign)) && checkSign(request, sign)) {
             //通过 —— 校验token有效性
-
 
         } else {
             //失败
-
+            logger.info("签名验证失败");
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return false;
         }
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object o, ModelAndView modelAndView) throws Exception {
-        System.out.println("执行自定义拦截器 <-----> postHandle ");
+        logger.info("执行自定义拦截器 <-----> postHandle ");
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object o, Exception e) throws Exception {
-        System.out.println("执行自定义拦截器 <-----> afterCompletion ");
+        logger.info("执行自定义拦截器 <-----> afterCompletion ");
     }
 
 

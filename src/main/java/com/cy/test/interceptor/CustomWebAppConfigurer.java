@@ -19,6 +19,7 @@ public class CustomWebAppConfigurer extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        System.out.println("将拦截器注入到容器中 <-----> addInterceptors");
         // 多个拦截器组成一个拦截器链
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用户排除拦截
